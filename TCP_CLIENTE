@@ -1,0 +1,17 @@
+import socket
+
+# Crear socket
+cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Conectarse al servidor
+cliente.connect(("127.0.0.1", 5000))
+
+# Enviar mensaje
+cliente.send("Hola servidor".encode())
+
+# Recibir respuesta
+respuesta = cliente.recv(1024).decode()
+print("Servidor responde:", respuesta)
+
+# Cerrar conexión
+cliente.close()

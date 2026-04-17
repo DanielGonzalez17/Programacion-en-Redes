@@ -1,0 +1,27 @@
+import socket
+
+# Crear socket TCP
+servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Asociar IP y puerto
+servidor.bind(("127.0.0.1", 5000))
+
+# Escuchar conexiones
+servidor.listen(1)
+print("Servidor TCP esperando conexión...")
+
+# Aceptar cliente
+conexion, direccion = servidor.accept()
+print("Conectado a:", direccion)
+
+# Recibir mensaje
+mensaje = conexion.recv(1024).decode()
+print("Cliente dice:", mensaje)
+
+# Enviar respuesta
+respuesta = "Hola cliente, mensaje recibido"
+conexion.send(respuesta.encode())
+
+# Cerrar conexión
+conexion.close()
+servidor.close()
